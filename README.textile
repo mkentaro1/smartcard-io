@@ -28,6 +28,28 @@ h2. Common Usage
 A pre-built jar file is available in the "deploy" folder. Together with the dependencies in "lib", add
 to the classpath for your project.
 
+Now is available on maven adding to pom.xml the following repository and package
+<pre>
+<code>
+<repository>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+</repository>
+</code>
+</pre>
+
+<pre>
+<code>
+<dependency>
+	<groupId>com.github.mkentaro1</groupId>
+	<artifactId>smartcard-io</artifactId>
+	<version>1.17.1</version>
+</dependency>
+</code>
+</pre>
+
+
+
 h2. PC/SC native usage
 
 On the most basic layer, we simply use a declarative approach to wrap PC/SC API functions. To work on this "abstraction" you can simply use *de.intarsys.security.smartcard.pcsc.nativec._PCSC*.
