@@ -44,3 +44,10 @@ task buildJar(type: Jar) {
     with jar
 }
 
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
