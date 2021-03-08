@@ -1,5 +1,6 @@
 plugins {
 	id 'java-library'
+	id 'maven-publish'
 }
 repositories {
 	jcenter()
@@ -25,7 +26,7 @@ if(JavaVersion.current() > JavaVersion.VERSION_1_9) {
 
 jar {
 	from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -41,4 +42,22 @@ task buildJar(type: Jar) {
                 exclude "META-INF/*.RSA"
             }
     with jar
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/mkentaro1/smartcard-io")
+            credentials {
+                username = project.findProperty("gpr.user") ?: "mkentaro1"
+                password = project.findProperty("gpr.key") ?: "2ecf274fcea442a155ac8321b8f2382d51eff021"
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
 }
